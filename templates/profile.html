@@ -1,0 +1,521 @@
+<! DOCTYPE html>
+  <Html>
+
+  <Head>
+    <title>PROFILE</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/icon type">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+    <style>
+      .column {
+        width: 50%;
+        float: left;
+      }
+
+      fieldset {
+        padding: 2px;
+        width: 96%;
+        height: 70%;
+        text-align: center;
+
+        font-size: 15px;
+        font-weight: bolder;
+        font-family: Arial, Helvetica, sans-serif;
+        /*background: transparent;*/
+        background-color: lightgray;
+        margin-left: 10px;
+        /*border: 5px black solid;*/
+        outline: dashed;
+        outline-offset: -10px;
+      }
+
+      nav {
+        background: black;
+        height: 80px;
+        width: 100%;
+        padding: 0px;
+        border: none;
+        display: inline-block;
+      }
+
+      label.logo {
+        color: #f2f2f2;
+        font-size: 30px;
+        line-height: 80px;
+        padding: 20px;
+        font-weight: 500;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      nav ul {
+        float: right;
+        margin-top: 6px;
+        margin-right: 60px;
+      }
+
+      nav ul li {
+  
+        display: inline-block;
+        text-decoration: none;
+        line-height: 80px;
+        /*margin: 0 2px;*/
+      }
+
+      nav ul li a {
+        
+        color: #f2f2f2;
+        font-weight: bolder;
+        font-size: 15px;
+        padding: 7px 13px;
+        border-radius: 3px;
+        /*text-transform: uppercase;*/ 
+        font-family: 'Poppins', sans-serif;
+      }
+
+      a{
+        text-decoration: none;
+      }
+
+      a.active {
+        text-decoration: none;
+        background: red;
+      }
+
+      a:hover {
+        background-color: white;
+        text-decoration: none;
+        color: black;
+      }
+
+      body {
+        color: black;
+        font-family: roboto;
+        user-select: none;
+        padding:0px;
+      }
+
+      hr {
+        border-top: 3px dashed black;
+        
+      }
+
+      .input {
+        width: 45%;
+        padding: 2px;
+        height: 25px;
+        margin-bottom: 25px;
+        border: 1px solid black;
+        color: #3e3e40;
+        font-size: 14px;
+        outline: none;
+        font-weight: bold;
+        transform: all 0.5s ease;
+        box-sizing: border-box;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-weight: bold;
+        list-style: none;
+        text-decoration: none;
+      }
+
+
+
+
+      .button {
+        background-color: #4CAF50;
+        /* Green */
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+      }
+
+      .button2 {
+        background-color: blueviolet;
+        color: white;
+        border: 1px solid black;
+      }
+
+      .button2:hover {
+        background-color: #1569C7;
+        color: white;
+      }
+
+      .display {
+        color: black;
+
+      }
+
+      .display:hover {
+        color: red;
+      }
+
+      .error1 {
+        color: red;
+        font-size: 16px;
+      }
+
+      .alert-error {
+        padding: 8px;
+        background-color: red;
+        color: black;
+      }
+
+      ::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        color: #3e3e40;
+        font-family: roboto;
+      }
+
+      ::-moz-placeholder {
+        /* Firefox 19+ */
+        color: #3e3e40;
+        font-family: roboto;
+      }
+
+      :-ms-input-placeholder {
+        /* IE 10+ */
+        color: #3e3e40;
+        font-family: roboto;
+      }
+
+      :-moz-placeholder {
+        /* Firefox 18- */
+        color: #3e3e40;
+        font-family: roboto;
+      }
+
+      /*i{
+        margin-left: -30px;
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+      }*/
+    </style>
+  </Head>
+
+  <body>
+    <nav>
+      <label class="logo"><b>&emsp;&emsp;&emsp;&emsp;PROFILE</label>
+      <ul>
+        <li><a href="/rthome"><i class="fa fa-fw fa-home"></i>Home</a></li>
+        <li><a href="/about"><i class="fa fa-fw fa-envelope "></i>About us</span></a></li>
+        <li><a href="/FAQ"><i class="fa fa-fw fa-question-circle "></i>FAQ</a></li>
+        <li><a href="/profile"><i class="fa fa-fw fa-user"></i>Profile</a></li>
+        <li><a class="active" href="/logout"> <i class="fa fa-fw fa-sign-out"></i>Logout</a></li>
+      </ul>
+      </b>
+
+    </nav>
+
+    <Center> <b>
+        {% for message in get_flashed_messages() %}
+        <div class="alert-error">{{ message }}</div>
+        {% endfor %}
+      </b>
+    </center>
+    <div class="row">
+      
+      <div class="column">
+        <br>
+        <fieldset>
+          <br>
+          <h2><u>PERSONAL DETAILS</u></h2>
+          <label class="display" onclick="display()"><b><u>How to Change your details? (Click here to
+                know)</u></b></label><br><br>
+          <form name="PROFILE" action="/profile/data1" method="POST" onsubmit="return validateForm()"><b>
+              <label for="uname">Name: {{ uname }}</label>
+              <input type="text" name="uname" class="input" minlength="4" maxlength="25" oninput="myFunction()"
+                value="{{ uname }}"><input type="submit" class="button button2" value="Update"><br />
+              <span class="error1"><b>
+                  <p id="name_error"></p>
+                </b></span>
+
+            </b></form>
+          <hr>
+          </hr>
+          <br>
+          <b><label for="email">Your Email ID : {{ e }}</label><br></b>
+          <br>
+          <hr>
+          </hr>
+          <br>
+          <form name="PROFILE2" action="/profile/data2" method="POST" onsubmit="return validateForm2()"><b>
+              <div id="class&s">
+                <label for="YEAR&SEC">Year and Section : {{ yrs }} </label>
+                <select name="YEAR&SEC" id="YEAR&SEC" oninput="myFunction()" value="{{ yrs }}" selected>
+                  <option value=""> Select an Option </option>
+                  <option value="1ST YEAR A SEC">1ST YEAR A SEC</option>
+                  <option value="1ST YEAR B SEC">1ST YEAR B SEC</option>
+                  <option value="1ST YEAR C SEC">1ST YEAR C SEC</option>
+                  <option value="1ST YEAR D SEC">1ST YEAR D SEC</option>
+                  <option value="1ST YEAR E SEC">1ST YEAR E SEC</option>
+                  <option value="2ND YEAR A SEC">2ND YEAR A SEC</option>
+                  <option value="2ND YEAR B SEC">2ND YEAR B SEC</option>
+                  <option value="2ND YEAR C SEC">2ND YEAR C SEC</option>
+                  <option value="2ND YEAR D SEC">2ND YEAR D SEC</option>
+                  <option value="2ND YEAR E SEC">2ND YEAR E SEC</option>
+                  <option value="3RD YEAR A SEC">3RD YEAR A SEC</option>
+                  <option value="3RD YEAR B SEC">3RD YEAR B SEC</option>
+                  <option value="3RD YEAR C SEC">3RD YEAR C SEC</option>
+                  <option value="3RD YEAR D SEC">3RD YEAR D SEC</option>
+                  <option value="3RD YEAR E SEC">3RD YEAR E SEC</option>
+                  <option value="4TH YEAR A SEC">4TH YEAR A SEC</option>
+                  <option value="4TH YEAR B SEC">4TH YEAR B SEC</option>
+                  <option value="4TH YEAR C SEC">4TH YEAR C SEC</option>
+                  <option value="4TH YEAR D SEC">4TH YEAR D SEC</option>
+                  <option value="4TH YEAR E SEC">4TH YEAR E SEC</option>
+                </select>
+                <br>
+                <br>
+                <span class="error1"><b>
+                    <p id="s_error"></p>
+                  </b></span>
+              </div>
+              <label for="dep">Your Department :&ensp; {{ d }}&emsp;&emsp;</label>
+
+              <select name="dep" id="dep" oninput="myFunction()" value="{{ d }}">
+                <option value=""> Select an Option </option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="E&I">E&I</option>
+                <option value="CSE">CSE</option>
+                <option value="MECH">MECH</option>
+                <option value="IT">IT</option>
+              </select><br>
+              <span class="error1"><b>
+                  <p id="dep_error"></p>
+                </b></span>
+                <br>
+              <center><input type="submit" class="button button2" value="Update">
+              </center>
+            </b></form>
+
+        </fieldset>
+      </div>
+      
+      <div class="column">
+        <br>
+        <fieldset>
+          <form name="PROFILE1" action="/profile/pdata" method="POST" onsubmit="return validateForm1()">
+            <br>
+            <h2><u>PASSWORD CHANGE</u></h2>
+
+            <label class="display" onclick="display1()"><b><u>How to Change your password? (Click here to
+                  know)</u></b></label>
+            <br>
+            <bR>
+
+            <label for="cupassword">Enter a your current Password :</label>
+            <input type="password" name="cupassword" id="cupassword" class="input" minlength="3" maxlength="15"
+              placeholder="Please enter a your current Password" oninput="myFunction1()"><i class="fa fa-eye classi" style="margin-left: -30px;height: 20px;width: 20px;cursor: pointer;"
+              id="togglePassword" height="20" width="20"></i><br />
+            <p id="cupassword_error"></p>
+            </b></span>
+
+            <label for="password">Enter your new Password &emsp;:&emsp;</label>
+            <input type="password" name="password" id="password" class="input" minlength="3" maxlength="15"
+              placeholder="Please enter a your new Password" oninput="myFunction1()"><i class="fa fa-eye classi" style="margin-left: -30px;height: 20px;width: 20px;cursor: pointer;"
+              id="togglePassword1" height="20" width="20"></i><br>
+
+            <span class="error1"><b>
+                <p id="password_error"></p>
+              </b></span>
+
+
+            <label for="cpassword">Enter again your new Password :</label>
+            <input type="password" name="cpassword" id="cpassword" class="input" minlength="3" maxlength="15"
+              placeholder="Please re-enter your new Password" oninput="same()"><i class="fa fa-eye classi" style="margin-left: -30px;height: 20px;width: 20px;cursor: pointer;" id="togglePassword2"
+              height="20" width="20"></i><br>
+
+            <span class="error1"><b>
+                <p id="cpassword_error"></p>
+              </b></span>
+            </b>
+            <b><a href="/forgot" target="_blank"><u>Forgot your current password?(Click here to visit forgot
+                  page)</u></a></b><br><br>
+
+
+            <center><input type="submit" class="button button2" value="Change Password">
+              <input type="reset" class="button button2" value="Cancel"></center></b>
+          </form>
+
+        </fieldset>
+      </div>
+    </div>
+
+    <script>
+      var yrs = {{ yrs }};
+      var f = 0;
+      if (yrs == "null" || yrs == undefined || yrs == "" || yrs == null) {
+        document.getElementById('class&s').style.display = 'none';
+        f = 1;
+      }
+
+      function validateForm() {
+        var x = document.forms["PROFILE"]["uname"].value;
+
+        if (x == null || x == "") {
+          nameError = "Please enter your name";
+          document.getElementById("name_error").innerHTML = nameError;
+          return false;
+        }
+        return true;
+      }
+
+      function validateForm1() {
+        var cu = document.forms["PROFILE1"]["cupassword"].value;
+        var p = document.forms["PROFILE1"]["password"].value;
+        var c = document.forms["PROFILE1"]["cpassword"].value;
+
+        if (cu == null || cu == "") {
+          cupasswordError = "Please enter your current password";
+          document.getElementById("cupassword_error").innerHTML = cupasswordError;
+          return false;
+        }
+
+        if (p == null || p == "") {
+          cupasswordError = "Please enter your current password";
+          document.getElementById("password_error").innerHTML = sError;
+          return false;
+        }
+        if (p != c) {
+          alert("Your new password doesn't match");
+          return false;
+        }
+        if (c == "") {
+          cpasswordError = "Please enter reconfirm your password";
+          document.getElementById("cpassword_error").innerHTML = cpasswordError;
+          return false;
+        }
+        return true;
+      }
+
+      function validateForm2() {
+        var s = document.forms["PROFILE2"]["YEAR&SEC"].value;
+        var d = document.forms["PROFILE2"]["dep"].value;
+
+
+
+        if (s == "" && f == 0) {
+          sError = "Please choose your year and section";
+          document.getElementById("s_error").innerHTML = sError;
+          return false;
+        }
+        if (d == "") {
+          depError = "Please choose your Department";
+          document.getElementById("dep_error").innerHTML = depError;
+          return false;
+        }
+        return true;
+      }
+
+
+      function myFunction() {
+        if (document.forms["PROFILE"]["uname"].value) {
+          document.getElementById("name_error").innerHTML = '';
+        }
+        if (document.forms["PROFILE2"]["YEAR&SEC"].value) {
+          document.getElementById("s_error").innerHTML = '';
+        }
+        if (document.forms["PROFILE2"]["dep"].value) {
+          document.getElementById("dep_error").innerHTML = '';
+        }
+      }
+
+      function myFunction1() {
+        if (document.forms["PROFILE1"]["cupassword"].value) {
+          document.getElementById("cupassword_error").innerHTML = '';
+        }
+        if (document.forms["PROFILE1"]["password"].value) {
+          document.getElementById("password_error").innerHTML = '';
+        }
+      }
+
+      function same() {
+        if (document.forms["PROFILE1"]["cpassword"].value) {
+          document.getElementById(cpassword_error).innerHTML = '';
+        }
+      }
+      function show0() {
+        var x = document.getElementById("cupassword");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+
+      function show() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+
+      function show1() {
+        var x = document.getElementById("cpassword");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+      function display() {
+        alert("Your details which was given by you is displayed here,if you find any mistake in it,please change it in near by text box or dropdown list and save it using near by update button.If you don't update then your changes will be not saved");
+      }
+      function display1() {
+        alert("To change your password,First enter your current password and then new password.also please confirm it again by entering new password.");
+      }
+      function selectfunction(id) {
+        document.getElementById(id).innerHTML = document.getElementById(id).value;
+
+      }
+      const togglePassword = document.querySelector('#togglePassword');
+      const cpassword = document.querySelector('#cupassword');
+      togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = cpassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        cpassword.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+      });
+      const togglePassword1 = document.querySelector('#togglePassword1');
+      const password = document.querySelector('#password');
+      togglePassword1.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+      });
+      const togglePassword2 = document.querySelector('#togglePassword2');
+      const copassword = document.querySelector('#cpassword');
+      togglePassword2.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = copassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        copassword.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+      });
+
+    </script>
+
+
+  </body>
+
+  </html>

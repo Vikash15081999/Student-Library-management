@@ -1,0 +1,353 @@
+﻿<! DOCTYPE html>
+  <Html>
+
+  <Head>
+    <title>ENTRY</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/icon type">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <style>
+      body {
+        font-weight: bold;
+        font-size: 15px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      fieldset {
+        border: #00cc00 10px solid;
+        padding: 10px;
+        color: white;
+        width: 95%;
+        font-weight: bold;
+        height: 80%;
+        background-image: url({{ url_for('static', filename='dataentry2.jpg')}});
+      background-position: center;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      user-select: none;
+      font-weight: bold;
+      }
+
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-weight: bold;
+        list-style: none;
+        text-decoration: none;
+      }
+
+      nav {
+        background: black;
+        height: 80px;
+        width: 100%;
+        display: inline-block;
+      }
+
+      label.logo {
+        color: #f2f2f2;
+        font-size: 20px;
+        line-height: 80px;
+        padding: 20px;
+        font-weight: 500;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      nav ul {
+        float: right;
+        margin-top: 6px;
+        margin-right: 60px;
+      }
+
+      nav ul li {
+        display: inline-block;
+        line-height: 80px;
+        margin: 0 2px;
+      }
+
+      nav ul li a {
+        color: #f2f2f2;
+        font-weight: bolder;
+        font-size: 15px;
+        padding: 7px 13px;
+        border-radius: 3px;
+        text-decoration: none;
+        /* text-transform: uppercase; */
+        font-family: 'Poppins', sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-weight: bold;
+        list-style: none;
+        text-decoration: none;
+      }
+
+      a.active {
+        background: red;
+        text-decoration: none;
+      }
+
+      a:hover {
+        background-color: white;
+        color: black;
+
+      }
+
+      .alert-error {
+        padding: 8px;
+        background-color: red;
+        color: black;
+        font-size: 16px;
+      }
+
+
+      .button {
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        font-weight: bold;
+        text-transform: uppercase;
+        background-color: red;
+
+      }
+
+      .button1 {
+        background-color: #b224ef;
+        color: white;
+        border: 1px solid black;
+        border-radius: 50px;
+      }
+
+      .button1:hover {
+        background-color: #7579ff;
+        color: white;
+      }
+
+      .button2 {
+        background-color: blueviolet;
+        color: white;
+        border: 1px solid black;
+      }
+
+      .button2:hover {
+        background-color: #1569C7;
+        color: white;
+      }
+
+      .display {
+        color: white;
+        background: transparent;
+        background-color: transparent;
+
+      }
+
+      .display:hover {
+        color: red;
+        background: transparent;
+        background-color: transparent;
+      }
+
+      .error1 {
+        color: red;
+        font-size: 16px;
+      }
+
+      .input {
+
+        width: 50%;
+        padding: 12px 20px 12px 40px;
+        height: 30px;
+        margin-bottom: 25px;
+        border: 2px solid black;
+        color: #3e3e40;
+        font-size: 14px;
+        font-weight: bold;
+        outline: none;
+        transform: all 0.5s ease;
+      }
+
+      h1 {
+        color: red;
+        user-select: none;
+
+      }
+    </style>
+  </head>
+
+  <body onload="generate()">
+
+    <nav>
+
+      <label class="logo"><b>&emsp;Username :&ensp;{{ uname }}&emsp;Mail ID :&ensp;{{ e }}</label>
+      <ul>
+        <li><a href="/rthome"><i class="fa fa-fw fa-home"></i>Home</a></li>
+        <li><a href="/about"><i class="fa fa-fw fa-envelope "></i>About us</span></a></li>
+        <li><a href="/FAQ"><i class="fa fa-fw fa-question-circle "></i>FAQ</a></li>
+        <li><a href="/profile"><i class="fa fa-fw fa-user "></i>Profile</a></li>
+        <li><a class="active" href="/logout"> <i class="fa fa-fw fa-sign-out"></i>Logout</a></li>
+      </ul>
+      </b>
+
+    </nav>
+    <center><u>
+        <h1>ENTRY FORM</h1>
+      </u></center>
+
+
+    <center>
+      <form name="ENTRY" action="/Entry/data" method="POST" onsubmit="return validateForm()">
+        <fieldset>
+          <Center> <b>
+              {% for message in get_flashed_messages() %}
+              <div class="alert-error">{{ message }}</div>
+              {% endfor %}
+            </b>
+          </center>
+          <br>
+          <label for="DATE">Date:(Date when book was borrowed from library)</label><br>
+          <input type="date" name="DATE" oninput="myFunction()" required><br>
+          <span class="error1"><b>
+              <p id="date_error"></p>
+            </b></span>
+          <br>
+
+
+          <b><a href="/book" class="active" target="_blank"><u>Need to Find the book ID?(Click here to find
+                it)</u></a></b><br>
+
+          <br>
+
+
+
+
+          <label for="book"> No. of books taken(between 1 and 5):</label>
+          <select name="book" id="book" onchange="generate()">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <br><br>
+          <div id="ch"></div>
+
+          <label for="book"> No. of books ID taken by you:</label>
+          <input type="text" id="bookL" name="books" value="" autocomplete="off"
+            style="background-color:yellow;color: red;text-align: center;font-weight: bolder;" readonly>
+          <br>
+          <br>
+          <br>
+
+
+
+
+
+
+          <input type="submit" class="button button2" value="Submit">
+          <a href="/rthome">
+            <button type="button" class="button button2">Return To Home Page</button></a>
+          <input type="reset" class="button button2" value="Reset">
+
+
+
+        </fieldset>
+      </form>
+    </center>
+    <script>
+      var book = [0, 0, 0, 0, 0];
+      function validateForm() {
+
+        var dt = document.forms["ENTRY"]["DATE"].value;
+        var books = document.forms["ENTRY"]["book"].value;
+
+
+
+        if (dt == null || dt == "") {
+          dtError = "Please enter valid date";
+          document.getElementById("date_error").innerHTML = dtError;
+          return false;
+        }
+        var myDate = new Date(dt);
+        var today = new Date();
+        if (myDate > today) {
+          alert("You cannot mention future date here");
+          return false;
+        }
+
+
+        var id, id1;
+        for (id = 1; id <= books && id <= 5; id++) {
+          if (document.forms["ENTRY"]['book' + id].value.length == 0) {
+            alert("Book ID:" + id + " slot cannot be empty");
+            return false;
+          }
+        }
+        for (id = 1; id <= books && id <= 5; id++) {
+          for (id1 = id + 1; id1 <= book && id1 <= 5; id1++) {
+            if (document.forms["ENTRY"]['book' + id].value == document.forms["ENTRY"]['book' + id1].value) {
+              alert("Book ID of " + id + " and " + id1 + "are same,you can't take one book two times,so please change");
+              return false;
+            }
+          }
+        }
+
+        return true;
+      }
+      function myFunction() {
+
+        if (document.forms["ENTRY"]["DATE"].value) {
+          document.getElementById("date_error").innerHTML = '';
+        }
+
+      }
+      function generate() {
+        var a = document.forms["ENTRY"]["book"].value;
+        var id;
+        var b = ["Book ID of 1st book ", "Book ID of 2nd book ", "Book ID of 3rd book ", "Book ID of 4th book ", "Book ID of 5th book "];
+        var text = "";
+        var books = ["<input type='number'  id='book1' min='1' oninput='values()'><br><br>", "<input type='number'  id='book2' oninput='values()' min='1'><br><br>", "<input type='number'  oninput='values()' id='book3' min='1'><br><br>", "<input type='number' oninput='values()' id='book4' min='1'><br><br>", "<input type='number' oninput='values()'  id='book5' min='1'><br><br>"];
+        for (id = 0; id < a && id < 5; id++) {
+          text += b[id] + "  " + books[id];
+        }
+        document.getElementById("ch").innerHTML = text;
+
+      }
+      function values() {
+        var books = document.forms["ENTRY"]["book"].value;
+        var id;
+        for (id = 1; id <= books && id <= 5; id++) {
+          book[id - 1] = document.forms["ENTRY"]['book' + id].value;
+        }
+        var b = book;
+        t = b.pop();
+        while (t == 0 || b.length >= books) {
+          t = b.pop();
+        }
+        b.push(t);
+        document.getElementById("bookL").readOnly = false;
+        document.getElementById("bookL").value = b;
+        document.getElementById("bookL").readOnly = true;
+
+      }
+
+
+
+
+
+
+    </script>
+  </body>
+
+  </html>

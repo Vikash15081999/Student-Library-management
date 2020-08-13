@@ -1,0 +1,339 @@
+<! DOCTYPE html>
+  <Html>
+
+  <Head>
+    <title>WELCOME TO LOGIN SYSTEM</title>
+    <link rel="icon" href="static/favicon.ico" type="image/icon type">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--<script type="text/javascript">
+    setInterval(changecolor,1000);
+    function changecolor(){
+      var x=document.getElementById("heading");
+      if(x.style.color=="black")
+      x.style.color="red";
+      else if(x.style.color=="red")
+      x.style.color="blue";
+      else if(x.style.color=="blue")
+      x.style.color="black";
+      else x.style.color="black";
+    }
+
+    </script>-->
+    <style>
+      fieldset {
+        border: none;
+        padding: 10px;
+        width: 50%;
+        font-weight: bold;
+
+
+
+        color: black;
+        background:transparent;
+        box-shadow: 0 0 50px #000;
+        border: 3px solid black;
+
+        display: inline-block;
+      }
+
+      body {
+        color: black;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        user-select: none;
+        /*background: linear-gradient(#7579ff, #b224ef);
+        background: linear-gradient(#fc4a1a,#f7b733);*/
+        background-image: url('static/register5.jpg');
+        background-position: center;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+
+
+
+
+
+      .input {
+        background-image: url('static/user.png');
+        background-size: 20px 20px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        width: 70%;
+        padding: 12px 20px 12px 40px;
+        height: 30px;
+        margin-bottom: 25px;
+        border: 2px solid black;
+        color: #3e3e40;
+        font-size: 14px;
+        font-weight: bold;
+        outline: none;
+        transform: all 0.5s ease;
+      }
+
+      .input:focus {
+        border-color: #2ecc71;
+      }
+
+      .input1 {
+        background-image: url('static/password.png');
+        background-size: 20px 20px;
+        background-position: 10px;
+        background-repeat: no-repeat;
+        width: 70%;
+        padding: 12px 20px 12px 40px;
+        height: 30px;
+        margin-bottom: 25px;
+        border: 2px solid black;
+        color: #3e3e40;
+        font-size: 14px;
+        font-weight: bold;
+        outline: none;
+        transform: all 0.5s ease;
+
+      }
+
+      .input1:focus {
+        border-color: #2ecc71;
+      }
+
+      .button {
+        border: none;
+        color: white;
+        padding: 10px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+
+      }
+
+      .button1 {
+        background-color: #b224ef;
+        color: white;
+        border: 1px solid black;
+
+      }
+
+      .button1:hover {
+        background-color: #7579ff;
+        color: white;
+      }
+
+      .button2 {
+        background-color: blueviolet;
+        color: white;
+        border: 1px solid black;
+      }
+
+      .button2:hover {
+        background-color: #1569C7;
+        color: white;
+      }
+
+
+
+      .error1 {
+        color: red;
+        font-size: 16px;
+      }
+
+      .alert-error {
+        padding: 8px;
+        background-color: red;
+        color: black;
+      }
+
+      ::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        color: #3e3e40;
+        font-family: roboto;
+      }
+
+      ::-moz-placeholder {
+        /* Firefox 19+ */
+        color: #3e3e40;
+        font-family: roboto;
+      }
+
+      :-ms-input-placeholder {
+        /* IE 10+ */
+        color: #3e3e40;
+        font-family: roboto;
+      }
+
+      :-moz-placeholder {
+        /* Firefox 18- */
+        color: #3e3e40;
+        font-family: roboto;
+      }
+
+      .button3 {
+        border: none;
+        color: white;
+        background-color: #b224ef;
+        padding: 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        font-weight: bolder;
+      }
+
+      .button3:hover {
+        background-color: #1569C7;
+        color: white;
+      }
+
+      .kn {
+        color: red;
+        font-size: 13px;
+        display: inline-block;
+        text-decoration: underline;
+        text-underline-position: below;
+      }
+
+      .kn:hover {
+        color: black;
+      }
+      .help{
+        display: none;
+
+      }
+
+      i {
+        margin-left: -30px;
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+      }
+    </style>
+
+  <body>
+    <Center> <b>
+        {% for message in get_flashed_messages() %}
+        <div class="alert-error">{{ message }}</div>
+        {% endfor %}
+      </b>
+    </center>
+    <br>
+    <center>
+      <b>
+        <br>
+        <br>
+        <fieldset>
+
+          <form name="register" action="/home" method="POST" onsubmit="return validateForm()">
+
+            <center>
+              <h1 id="heading"><u>LOGIN</u></h1>
+            </center>
+            <!--<label for="email">Email ID:</label><br>-->
+            <input type="email" name="email" id="email" class="input" minlength="15" maxlength="40"
+              placeholder="Enter your Email ID" oninput="myFunction()" autocomplete="off"><br>
+            <span class="error1"><b><span id="email_error"></span></b></span>
+            <div id="onhelp" ><span class="kn"  onclick="help()">
+              Need help with Email ID</span></div>
+            <div id="help" class="help"><span class="kn" onclick="alert('You can also use button @gmail.com or @yahoo.com for adding them in Email ID TEXTBOX after entering your College ID.')">
+              Click to know </span>
+              <input type="button" class="button3" value="@gmail.com" onClick="AddToField('@gmail.com');">
+            <input type="button" class="button3" value="@yahoo.com " onClick="AddToField('@yahoo.com ');">
+            
+            <span class="kn" onclick="undo()">Close help</span>
+            </div>
+            <br>
+
+            <!--<label for="password">Password:</label><br>-->
+            <input type="password" name="password" id="password" class="input1" minlength="3" maxlength="10"
+              placeholder="Enter your Password" oninput="myFunction()" autocomplete="off"><i class="fa fa-eye"
+              id="togglePassword" height="20" width="20"></i>
+            <span class="error1"><b><span id="password_error"></span></b></span><br>
+
+            <input type="submit" class="button button1" value="LOGIN">
+          </form><br>
+          <b>
+            <a href="\forgot"><button class="button button2"> Forgot your Password ? </button></a>&emsp;&emsp;
+            <a href="\register"><button class="button button2">NEW? REGISTER HERE</button></a>
+          </b>
+
+
+        </fieldset>
+      </b>
+    </center>
+
+    <!--<img src="static/animated-robot.gif" width="160" height="160"> </img>-->
+
+
+    <script>
+      function help(){
+        document.getElementById("help").style.display="block";
+        document.getElementById("onhelp").style.display="none";
+      }
+      function undo(){
+        document.getElementById("help").style.display="none";
+        document.getElementById("onhelp").style.display="block";
+      }
+      function AddToField(c) {
+        e = removeText();
+        document.getElementById("email").value = e + c;
+      }
+      function removeText() {
+        var originalText = document.getElementById("email").value;
+        var newText = originalText.replace('@gmail.com ', '');
+        newText = newText.replace('@yahoo.com ', '');
+        newText = newText.replace('@', '');
+
+        return newText;
+      }
+      function validateForm() {
+
+        var y = document.forms["register"]["email"].value;
+        var z = document.forms["register"]["password"].value;
+
+
+
+        if (y == null || y == "") {
+          emailError = "Please enter your Email ID";
+          document.getElementById("email_error").innerHTML = emailError;
+          return false;
+        }
+
+        if (z == null || z == "") {
+          passwordError = "Please enter your Password";
+          document.getElementById("password_error").innerHTML = passwordError;
+          return false;
+        }
+        return true;
+      }
+      function myFunction() {
+
+        if (document.forms["register"]["email"].value) {
+          document.getElementById("email_error").innerHTML = '';
+        }
+        if (document.forms["register"]["password"].value) {
+          document.getElementById("password_error").innerHTML = '';
+        }
+      }
+      const togglePassword = document.querySelector('#togglePassword');
+      const password = document.querySelector('#password');
+      togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+      });
+
+    </script>
+
+
+  </body>
+
+  </html>

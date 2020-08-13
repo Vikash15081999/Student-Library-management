@@ -1,0 +1,361 @@
+<! DOCTYPE html>
+  <Html>
+
+  <Head>
+    <title>REGISTER PAGE</title>
+    <link rel="icon" href="static/favicon.ico" type="image/icon type">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+    <style>
+      fieldset {
+        border: 3px solid black;
+        padding: 4px;
+        margin-left: 300px;
+        padding-left: 30px;
+        box-shadow: 0 0 50px #000;
+        width: 50%;
+        color: black;
+        float: left;
+        font-size: 15px;
+        background:transparent;
+        font-weight: bold;
+        display: block;
+      }
+
+      body {
+        color: black;
+        font-family: roboto;
+        user-select: none;
+        background-image: url('static/register5.jpg');
+        background-position: center;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        font-weight: bold;
+      }
+
+
+      .input {
+        width: 50%;
+        padding: 15px;
+        height: 25px;
+        margin-bottom: 25px;
+        border: 2px solid black;
+        color: #3e3e40;
+        font-size: 14px;
+        outline: none;
+        transform: all 0.5s ease;
+        box-sizing: border-box;
+      }
+
+      .input:focus {
+        border-color: #2ecc71;
+      }
+
+      .button {
+        border: none;
+        color: white;
+        padding: 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+
+      }
+
+      .button2 {
+        background-color: blueviolet;
+        color: white;
+        border: 1px solid black;
+      }
+
+      .button2:hover {
+        background-color: #1569C7;
+        color: white;
+      }
+
+
+
+      .error1 {
+        color: red;
+        font-size: 16px;
+      }
+
+      .alert-error {
+        padding: 8px;
+        background-color: red;
+        color: black;
+      }
+
+      ::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        color: #3e3e40;
+        font-family: roboto;
+      }
+
+      ::-moz-placeholder {
+        /* Firefox 19+ */
+        color: #3e3e40;
+        font-family: roboto;
+      }
+
+      :-ms-input-placeholder {
+        /* IE 10+ */
+        color: #3e3e40;
+        font-family: roboto;
+      }
+
+      :-moz-placeholder {
+        /* Firefox 18- */
+        color: #3e3e40;
+        font-family: roboto;
+      }
+
+      .display {
+        color: black;
+
+      }
+      select{
+        width:150px
+      }
+
+      .display:hover {
+        color: red;
+      }
+
+      i{
+        margin-left: -30px;
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+      }
+    </style>
+
+  <body>
+    <Center> <b>
+        {% for message in get_flashed_messages() %}
+        <div class="alert-error">{{ message }}</div>
+        {% endfor %}
+      </b>
+    </center>
+    <b>
+      <br>
+      <fieldset>
+        <form name="register" action="/rhome" method="POST" onsubmit="return validateForm()">
+          <b>
+            <center>
+              <h2><u>REGISTER</u></h2>
+            </center>
+
+            <label for="uname">Enter your Name : &emsp;&emsp;&emsp;</label>
+            <input type="text" name="uname" class="input" minlength="4" maxlength="25" oninput="myFunction()"
+              autocomplete="off">
+            <span class="error1" id="name_error">
+            </span><br>
+
+            <label for="email">Enter College Email ID :&ensp;</label>
+            <input type="email" name="email" class="input" minlength="15" maxlength="40" oninput="myFunction()"
+              autocomplete="off">
+            <span class="error1" id="email_error"></span><br />
+            <b><u class="display" onclick="display()">Why we ask for mail ID?(Click here)</u>&emsp;&emsp;<u class="display"><a href="/forgot">Forgot page(Click here)</a></u>&emsp;&emsp;<u class="display"><a href="/FAQ1">FAQ page(Click here)</a></u></b><br><br>
+
+            <label for="password">Enter a Password : &emsp;&emsp;&emsp;</label>
+            <input type="password" name="password" id="password" class="input" minlength="5" maxlength="15"
+              pattern="[A-Za-z1-9@_]{3,}" title="It should contain characters in A-Z,a-z,1-9,@,_ only" oninput="myFunction()"><i class="fa fa-eye"
+              id="togglePassword" height="20" width="20"></i>
+            <br>
+            <span class="error1" id="password_error"></span>
+            
+
+            <label for="cpassword">Re-enter your Password:&ensp;</label>
+            <input type="password" name="cpassword" id="cpassword" class="input" minlength="5" maxlength="15"
+              pattern="[A-Za-z1-9@_]{3,}" title="It should contain characters in A-Z,a-z,1-9,@,_ only" oninput="same()"><i class="fa fa-eye" id="togglePassword1" height="20" width="20"></i><br>
+            <span class="error1" id="cpassword_error"></span>
+            Are you Student or Staff :&emsp;
+            <LAbel><input type="radio" id="Student" name="position" value="Student"
+                oninput="remove()">Student</input></LAbel>
+            <LAbel><input type="radio" id="Staff" name="position" value="Staff"
+                oninput="remove()">Staff</input></LAbel><br><br>
+
+
+            <label for="dep">Select your Department :&emsp;&emsp;</label>
+            <select name="dep" id="dep" oninput="myFunction()">
+              <option value="">Select an Option</option>
+              <option value="ECE">ECE</option>
+              <option value="EEE">EEE</option>
+              <option value="E&I">E&I</option>
+              <option value="CSE">CSE</option>
+              <option value="MECH">MECH</option>
+              <option value="IT">IT</option>
+            </select><br>
+            <span class="error1" id="dep_error"></span><br>
+            <div id="class&s">
+              <label for="YEAR&SEC" id="YEAR&SECl">Select your Year and Section :</label>
+              <select name="YEAR&SEC" id="YEAR&SEC" oninput="myFunction()">
+                <option value=""> Select an Option </option>
+                <option value="1ST YEAR A SEC">1ST YEAR A SEC</option>
+                <option value="1ST YEAR B SEC">1ST YEAR B SEC</option>
+                <option value="1ST YEAR C SEC">1ST YEAR C SEC</option>
+                <option value="1ST YEAR D SEC">1ST YEAR D SEC</option>
+                <option value="1ST YEAR E SEC">1ST YEAR E SEC</option>
+                <option value="2ND YEAR A SEC">2ND YEAR A SEC</option>
+                <option value="2ND YEAR B SEC">2ND YEAR B SEC</option>
+                <option value="2ND YEAR C SEC">2ND YEAR C SEC</option>
+                <option value="2ND YEAR D SEC">2ND YEAR D SEC</option>
+                <option value="2ND YEAR E SEC">2ND YEAR E SEC</option>
+                <option value="3RD YEAR A SEC">3RD YEAR A SEC</option>
+                <option value="3RD YEAR B SEC">3RD YEAR B SEC</option>
+                <option value="3RD YEAR C SEC">3RD YEAR C SEC</option>
+                <option value="3RD YEAR D SEC">3RD YEAR D SEC</option>
+                <option value="2RD YEAR E SEC">3RD YEAR E SEC</option>
+                <option value="4TH YEAR A SEC">4TH YEAR A SEC</option>
+                <option value="4TH YEAR B SEC">4TH YEAR B SEC</option>
+                <option value="4TH YEAR C SEC">4TH YEAR C SEC</option>
+                <option value="4TH YEAR D SEC">4TH YEAR D SEC</option>
+                <option value="4TH YEAR E SEC">4TH YEAR E SEC</option>
+              </select><br>
+              <span class="error1"><b>
+                  <span id="s_error"></span>
+                </b></span><br>
+            </div>
+            <center>
+              <input type="submit" class="button button2" value="REGISTER"></center>
+          </b></form>
+          <center><a href="/"><button class="button button2">LOGIN PAGE</button></a></center>
+
+
+
+    </b>
+    </fieldset>
+
+    <script>
+      function validateForm() {
+        var x = document.forms["register"]["uname"].value;
+        var y = document.forms["register"]["email"].value;
+        var z = document.forms["register"]["password"].value;
+        var c = document.forms["register"]["cpassword"].value;
+        var s = document.forms["register"]["YEAR&SEC"].value;
+        var d = document.forms["register"]["dep"].value;
+
+
+
+        if (x == null || x == "") {
+          nameError = "Please enter your name";
+          document.getElementById("name_error").innerHTML = nameError;
+          return false;
+        }
+
+        if (y == null || y == "") {
+          emailError = "Please enter your email";
+          document.getElementById("email_error").innerHTML = emailError;
+          return false;
+        }
+
+        if (z == null || z == "") {
+          passwordError = "Please enter your Password";
+          document.getElementById("password_error").innerHTML = passwordError;
+          return false;
+        }
+        if (c == null || c == "" || c != z) {
+          cpasswordError = "Both Passwords should be same";
+          document.getElementById("cpassword_error").innerHTML = cpasswordError;
+          return false;
+        }
+        if (s == "" && document.getElementById("Student").checked) {
+          sError = "Please choose your year and section";
+          document.getElementById("s_error").innerHTML = sError;
+          return false;
+        }
+        if (document.getElementById("Staff").checked!=true && document.getElementById("Student").checked!=true) {
+          alert("Choose your profession student or staff?")
+          return false;
+        }
+        if (d == "") {
+          depError = "Please choose your Department";
+          document.getElementById("dep_error").innerHTML = depError;
+          return false;
+        }
+        return true;
+      }
+      function myFunction() {
+        if (document.forms["register"]["uname"].value) {
+          document.getElementById("name_error").innerHTML = '';
+        }
+        if (document.forms["register"]["email"].value) {
+          document.getElementById("email_error").innerHTML = '';
+        }
+        if (document.forms["register"]["password"].value) {
+          document.getElementById("password_error").innerHTML = '';
+        }
+        if (document.forms["register"]["YEAR&SEC"].value) {
+          document.getElementById("s_error").innerHTML = '';
+        }
+        if (document.forms["register"]["dep"].value) {
+          document.getElementById("dep_error").innerHTML = '';
+        }
+      }
+      function same() {
+        if (document.forms["register"]["cpassword"].value) {
+          document.getElementById("cpassword_error").innerHTML = '';
+        }
+      }
+      function show() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+      function show1() {
+        var x = document.getElementById("cpassword");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+      function remove() {
+
+        if (document.getElementById("Staff").checked) {
+          document.getElementById('class&s').style.display = 'none';
+        }
+        if (document.getElementById("Student").checked) {
+          document.getElementById('class&s').style.display = 'block';
+        }
+
+      }
+      function display() {
+        alert("We gather your mail ID for sending you a mail on successful registration and also for various purposes.Check FAQs for more details");
+      }
+      const togglePassword = document.querySelector('#togglePassword');
+      const password = document.querySelector('#password');
+      togglePassword.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+      });
+      const togglePassword1 = document.querySelector('#togglePassword1');
+      const cpassword = document.querySelector('#cpassword');
+      togglePassword1.addEventListener('click', function (e) {
+        // toggle the type attribute
+        const type = cpassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        cpassword.setAttribute('type', type);
+        // toggle the eye slash icon
+        this.classList.toggle('fa-eye-slash');
+      });
+
+
+    </script>
+
+
+  </body>
+
+  </html>

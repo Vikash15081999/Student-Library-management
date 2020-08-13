@@ -1,0 +1,139 @@
+<! DOCTYPE html>
+  <Html>
+
+  <Head>
+    <title>FORGOT PAGE</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/icon type">
+
+
+    <style>
+      fieldset {
+        border: 2px solid black;
+        padding: 10px;
+        width: 50%;
+
+        color: black;
+        /*background: transparent;*/
+        background-color: white;
+        float: right;
+        margin-right: 50px;
+      }
+
+      .input {
+        width: 50%;
+        height: 30px;
+        margin-bottom: 25px;
+        border: 3px solid black;
+        color: #3e3e40;
+        font-size: 14px;
+        outline: none;
+        transform: all 0.5s ease;
+      }
+
+      body {
+        font-size: 20px;
+        margin: 0px 0px 0px 0px;
+        padding: 0px;
+        background-image: url('static/forgot.jpg');
+        background-position: fixed;
+        background-size: 100% 100%;
+        color: red;
+        background-repeat: no-repeat;
+        font-family: roboto;
+        user-select: none;
+      }
+
+      .heading {
+        color: blueviolet;
+      }
+
+
+      .button {
+        border: none;
+        color: white;
+        padding: 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        text-transform: uppercase;
+
+      }
+
+      .button1 {
+        background-color: blueviolet;
+        color: white;
+        border: 1px solid black;
+      }
+
+      .button1:hover {
+        background-color: #1569C7;
+        color: white;
+      }
+
+      .alert-error {
+        padding: 8px;
+        background-color: red;
+        color: black;
+      }
+    </style>
+
+  <body>
+    <br>
+    <Center> <b>
+        {% for message in get_flashed_messages() %}
+        <div class="alert-error">{{ message }}</div>
+        {% endfor %}
+      </b>
+    </center>
+
+    <center>
+      <fieldset><b>
+          <p class="heading"><u>Forgot your Password ?</u></p>
+          <p class="heading"><u>NUMBER OF SOLUTION/METHODS TO LOGIN</u></p>
+          <p>1) Did you forget your password,please check your registered mail ID for your login credentials.</p>
+          <p>2) If you want us to mail you login credentials and also how to change your password,Please fill the your
+            registered mail ID below and click send mail.(Make Sure that you have active internet so that we can process
+            your request)
+          <p>
+          <form name="forgot" action="/sforgot" method="POST" onsubmit="return validateForm()">
+            <label for="email"> Registered Email ID:</label>
+            <input type="email" name="email" class="input" minlength="15" maxlength="40" oninput="myFunction()"
+              autocomplete="off">
+            <span class="error1"><b>
+                <p id="email_error"></p>
+              </b></span>
+            <input type="submit" class="button button1" value="SEND MAIL">
+          </form>
+          <a href="/"><button class="button button1">LOGIN PAGE</button></a>&emsp;&emsp;
+          <a href="/register"><button class="button button1">REGISTER PAGE</button></a>
+        </b>
+    </center>
+    </fieldset>
+    <script>
+      function validateForm() {
+
+        var y = document.forms["forgot"]["email"].value;
+
+        if (y == null || y == "") {
+          emailError = "Please enter your email";
+          document.getElementById("email_error").innerHTML = emailError;
+          return false;
+        }
+
+        return true;
+      }
+      function myFunction() {
+        if (document.forms["forgot"]["email"].value) {
+          document.getElementById("email_error").innerHTML = '';
+        }
+      }
+
+    </script>
+
+
+  </body>
+
+  </html>

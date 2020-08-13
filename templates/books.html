@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Books</title>
+    <link rel="icon" href="static/favicon1.ico" type="image/icon type">
+
+
+    <style>
+        body {
+            color: black;
+            font-weight: bold;
+            font-family: roboto;
+            user-select: none;
+            /*height:950px;;*/
+
+            background-image: url('static/books.jpeg');
+            background-position: center;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+
+        .button {
+            border: 2px solid black;
+            color: white;
+            font-weight: bold;
+
+            background-color: blueviolet;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+
+
+        }
+
+        .error1 {
+            color: red;
+            font-size: 16px;
+        }
+
+        .button:hover {
+            background-color: #1569C7;
+            color: white;
+            font-weight: bold;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+            border: 2px solid black;
+        }
+
+        #myTable td,
+        #myTable th {
+            border: 2px solid black;
+            text-align: center;
+        }
+
+        #myTable tr {
+            background-color: #f2f2f2;
+        }
+
+        #myTable tr:hover {
+            background-color: #ddd;
+        }
+
+        #myTable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            color: white;
+            background-color: black;
+            border-color: black;
+        }
+
+        .display {
+            color: black;
+
+        }
+
+        .display:hover {
+            color: red;
+        }
+
+        .input {
+            background-image: url('static/searchicon.png');
+            background-size: 20px 20px;
+            background-position: 10px;
+            background-repeat: no-repeat;
+            width: 45%;
+            padding: 12px 20px 12px 40px;
+            height: 25px;
+            margin-bottom: 25px;
+            border: 1px solid black;
+            color: #3e3e40;
+            font-size: 14px;
+            outline: none;
+            transform: all 0.5s ease;
+            box-sizing: border-box;
+        }
+
+        .input1 {
+
+            width: 25%;
+            height: 25px;
+            margin-bottom: 25px;
+            border: 1px solid black;
+            color: #3e3e40;
+            font-size: 14px;
+            outline: none;
+            transform: all 0.5s ease;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body onload="showdata()">
+    <center><b>
+            <b><u class="display" onclick="display()">Didn't find your Book in the table?(Click here to know)</u></b>
+            <br>
+
+            <input id="bookname" class="input1" type="text" oninput="myFunction()"
+                placeholder="Enter book name followed by author name">
+            <button class="button" onclick="add()">Add into table</button><button class="button"
+                onclick="exportToExcel()">Generate The Excel file</button>
+            <span class="error1"><b>
+                    <p id="error"></p>
+                </b></span>
+
+        </b>
+
+        <br>
+        <b><u class="display" onclick="display1()">How to Search the book name again and again?(Click here to
+                know)</u></b><br>
+        <input id="myInput" class="input" type="text" onkeyup="searchSname()"
+            placeholder="Search using book ID or book name here">
+
+
+
+        <table id="myTable">
+            <tbody>
+                <tr>
+                    <th>BOOK ID</th>
+                    <th>BOOK NAME</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>The Autobiography of an Unknown Indian Nirad C. Chaudhuri </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>An Autobiography Jawaharlal Nehru </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Baburnama Babur </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Majya Jalmachi Chittarkatha Shantabai Kamble </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+
+    <script>
+
+        var arr = new Array();
+
+        function getdata() {
+            var str = localStorage.getItem("tdata");
+            if (str != null) {
+                arr = JSON.parse(str);
+            }
+        }
+        function showdata() {
+            getdata();
+            var table = document.getElementById("myTable");
+            for (i = 0; i < arr.length; i++) {
+                var rowCount = table.rows.length;
+                var row = table.insertRow(rowCount);
+                var x = row.insertCell(0);
+                x.innerHTML = arr[i].bookid;
+                var y = row.insertCell(1);
+                y.innerHTML = arr[i].bookname;
+            }
+
+        }
+
+
+
+        function searchSname() {
+            var input, filter, found, table, tr, td, i, j;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        found = true;
+                    }
+                }
+                if (found) {
+                    tr[i].style.display = "";
+                    found = false;
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+
+        function show() {
+
+            var table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    tr[i].style.display = "";
+
+                }
+            }
+        }
+        function add() {
+            var table = document.getElementById('myTable');
+            var rowCount = table.rows.length;
+            var bookid = rowCount;
+            var bookname = document.getElementById('bookname').value;
+            if (bookname == null || bookname == "") {
+                alert("Enter the book name before adding it to table");
+                return;
+            }
+            if (tablecheck(bookid, bookname)) {
+                var row = table.insertRow(rowCount);
+                var x = row.insertCell(0);
+                x.innerHTML = bookid;
+                var y = row.insertCell(1);
+                y.innerHTML = bookname;
+                arr.push({
+                    bookid: rowCount,
+                    bookname: document.getElementById('bookname').value
+                });
+                localStorage.setItem("tdata", JSON.stringify(arr));
+                alert(bookname + "is added with Book ID:" + bookid);
+            }
+
+        }
+        function tablecheck(bookid, bookname) {
+            var table = document.getElementById("myTable");
+            var tr = table.getElementsByTagName("tr");
+            var i, j, td, found;
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                if (td[0].innerHTML === bookid) {
+                    found = true;
+                    document.getElementById("error").innerHTML = "This book ID is already used by another book Please mention some other Book ID ";
+                    return false;
+                }
+                if (td[1].innerHTML.toUpperCase() === bookname.toUpperCase()) {
+                    found = true;
+                    document.getElementById("error").innerHTML = "This book name is already present in table with Book ID :".concat(td[0].innerHTML);
+                    return false;
+
+                }
+
+            }
+            return true;
+
+        }
+        function display() {
+            alert("Kindly create new book ID for books which is not available in the table.");
+        }
+        function display1() {
+            alert("Type the book name/book ID in textbox it will automatically search for the book. After searching remove all characters to show all the books and then you can search again.");
+        }
+        function deletedata() {
+            localStorage.clear()
+        }
+        function myFunction() {
+            if (document.getElementById("bookname").value) {
+                document.getElementById("error").innerHTML = '';
+            }
+        }
+        function exportToExcel() {
+            var downloadurl;
+            var tableID = "myTable";
+            var dataFileType = 'application/vnd.ms-excel';
+            var tableSelect = document.getElementById(tableID);
+            var tableHTMLData = tableSelect.outerHTML.replace(/ /g, '%20');
+
+            // Specify file name
+            filename = 'Books along with ID.xls';
+
+            // Create download link element
+            downloadurl = document.createElement("a");
+
+            document.body.appendChild(downloadurl);
+
+            if (navigator.msSaveOrOpenBlob) {
+                var blob = new Blob(['\ufeff', tableHTMLData], {
+                    type: dataFileType
+                });
+                navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                // Create a link to the file
+                downloadurl.href = 'data:' + dataFileType + ', ' + tableHTMLData;
+
+                // Setting the file name
+                downloadurl.download = filename;
+
+                //triggering the function
+                downloadurl.click();
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
