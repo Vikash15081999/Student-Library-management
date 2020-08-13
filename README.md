@@ -8,11 +8,11 @@ It can accessed in Laptop/PC which contains this entire repositories.
 
 email1.html is file which contains header image of mail content.
 
-*.To add User Email ID verification and also add send mail facility if User has forgot his/her password.You have to add your library server mail ID (that is your choice) and password in necessary place in "library server.py" code.
+To add User Email ID verification and also add send mail facility if User has forgot his/her password.You have to add your library server mail ID (that is your choice) and password in necessary place in "library server.py" code.
 
-*.It is not necessary to add server mail ID and its password,it is based on your choice.
+It is not necessary to add server mail ID and its password,it is based on your choice.
 
-*.For this process, "sender_mail" will be server mail ID and "password1" will be its password.(I have also commented near them enter the details).  
+For this process, "sender_mail" will be server mail ID and "password1" will be its password.(I have also commented near them enter the details).  
 
 <u>Note :</u>
 
