@@ -14,7 +14,7 @@ It is not necessary to add server mail ID and its password,it is based on your c
 
 For this process, "sender_mail" will be server mail ID and "password1" will be its password.(I have also commented near them enter the details).  
 
-<u>Note :</u>
+_Note_ :
 
 You have to change the settings in server mail ID to send mail.Otherwise you might see Authenticate error or print statement saying no Internet connection. 
 
@@ -22,7 +22,7 @@ if your server mail ID is Gmail, Kindly turn off two step verification and go to
 
 It will show like below if you do the above process correctly,then it will show as below image.<br>
 
-![ScreenShot](latest.png)
+![ScreenShot](https://github.com/Vikash15081999/Student-Library-management/blob/master/LESS%20SECURE.png)
 
 
 <u>IMPORTANT LINK OF WEB APPLICATIONS</u>
@@ -35,7 +35,7 @@ It will show like below if you do the above process correctly,then it will show 
 | /FAQ          | FAQ Page        |
 
 
-<u>Note</u> : The above url has to be typed on after "http://localhost:5000". 
+_Note_ : The above url has to be typed on after "http://localhost:5000". 
 
 <b>
  
