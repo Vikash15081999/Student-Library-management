@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FAQs Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="static/favicon1.ico" type="image/icon type">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        details {
+            margin: 1px auto;
+            padding: 15px 10px 15px 10px;
+            width: 600px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bolder;
+            max-width: calc(100% - 2rem);
+            position: relative;
+            border: 5px solid white;
+            border-radius: 6px;
+            background-color: #7579ff;
+            color: #ECEFF1;
+            transition: background-color .15s;
+            user-select: none;
+        }
+
+        details> :last-child {
+            margin-bottom: 1rem;
+        }
+
+        details::before {
+            width: 100%;
+            height: 100%;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: inherit;
+            opacity: .15;
+            box-shadow: 0 .25em .5em #263238;
+            pointer-events: none;
+            transition: opacity .2s;
+            z-index: -1;
+        }
+
+        details[open] {
+            background-color: #440099;
+        }
+
+        details::before {
+            opacity: .6;
+        }
+
+
+
+        summary {
+            background-color: yellow;
+            color: black;
+            /*clip-path: polygon(25px 0%, 100% 0%, calc(100% - 25px) 100%, 0% 100%);*/
+            padding: 10px 15px 15px 15px;
+            display: block;
+            position: relative;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 5px solid black;
+        }
+
+        summary::before,
+        summary::after {
+            width: .75em;
+            height: 2px;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            content: '';
+            background-color: black;
+            text-align: center;
+            margin-right: 5px;
+            transform: translateY(-50%);
+            transition: transform .2s ease-in-out;
+        }
+
+        summary::after {
+            transform: translateY(-50%) rotate(90deg);
+        }
+
+        summary[open] {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-weight: bold;
+            list-style: none;
+            text-decoration: none;
+        }
+        .con a:visited{
+            text-decoration: none;
+            color:black;
+
+        }
+
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            background-color: #7579ff;
+        }
+
+
+
+        p {
+            margin: 0 0 1em;
+            line-height: 1.5;
+            font-size: medium;
+            font-weight: bolder;
+            
+            display: inline-block;
+        }
+        #navbar{
+            position: fixed;
+            display: inline-block;
+            width: 100%;
+            height:80px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /*background-color: red;*/
+            /* rgba(0,0,0,0.5);*/
+
+            z-index: 10000;
+            cursor: pointer;
+        }
+
+        nav {
+            background: black;
+            height: 80px;
+            width: 100%;
+            display: inline-block;
+        }
+
+        label.logo {
+            color: #f2f2f2;
+            font-size: 30px;
+            line-height: 80px;
+            padding: 20px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        nav ul {
+            float: right;
+            margin-top: 6px;
+            margin-right: 60px;
+        }
+
+        nav ul li {
+
+            display: inline-block;
+            text-decoration: none;
+            line-height: 80px;
+            margin: 0 2px;
+        }
+
+        nav ul li a {
+
+            color: #f2f2f2;
+            font-weight: bolder;
+            font-size: 15px;
+            padding: 7px 13px;
+            border-radius: 3px;
+            /*text-transform: uppercase;*/
+            font-family: 'Poppins', sans-serif;
+        }
+
+        a {
+
+            text-decoration: none;
+        }
+
+        a.active {
+            text-decoration: none;
+            background: red;
+        }
+
+        a:hover {
+            background-color: white;
+            text-decoration: none;
+            color: black;
+        }
+
+        div {
+            text-align: center;
+            color: white;
+            border: 5px solid white;
+            width: fit-content;
+
+        }
+
+        .con {
+            border: 5px solid black;
+            background-color: white;
+            color: black;
+            width: 600px;
+            
+        }
+
+        div ul {
+            list-style-type: circle;
+            text-align: left;
+            margin-left: 30px;
+        }
+
+        div ul li::before {
+            text-align: left;
+            content: "\2022";
+            color: black;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        .button {
+        border: none;
+        color: white;
+        padding: 8px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-weight: bold;
+        }
+        .button2 {
+        background-color: blueviolet;
+        color: white;
+        border: 1px solid black;
+        }
+
+      .button2:hover {
+        background-color: #1569C7;
+        color: white;
+      }
+      .column{
+          float: left;
+          width:50%;
+         
+      }
+      .column1{
+          float: left;
+          width:49%;
+          
+      }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <label class="logo">&emsp;&emsp;&emsp;<b>Frequently Asked Questions(FAQ)</b> </label>
+
+        <b>
+            <ul>
+                <li><a href="/rthome"><i class="fa fa-fw fa-home"></i>Home</a></li>
+                <li><a href="/about"><i class="fa fa-fw fa-envelope "></i>About us</span></a></li>
+                <li><a href="/FAQ"><i class="fa fa-fw fa-question-circle "></i>FAQ</a></li>
+                <li><a href="/profile"><i class="fa fa-fw fa-user "></i>Profile</a></li>
+                <li><a class="active" href="/logout"> <i class="fa fa-fw fa-sign-in"></i>Login</a></li>
+            </ul>
+        </b>
+
+    </nav>
+    
+    <center>
+        <div id="top" class="con">
+            <br><br><br><br>
+            <u>
+                <h4 style="color: blue;">Click below to navigate to respective Frequently Asked Questions(FAQs)</h4>
+            </u>
+            <ul>
+                <li style="color: black;"><a href="#general">General FAQs</a></li>
+                <li style="color: black;"><a href="#login">Login and Profile FAQs</a></li>
+                <li style="color: black;"><a href="#other">Entry,Renewal and Return FAQs</a></li>
+            </ul>
+        </div>
+
+        <div id="general" class="column">
+            <h3>GENERAL FAQs</h3>
+            <div id="general-content">
+                <details>
+                    <summary>Why we need internet connection for using this library?</summary>
+                    <p>Yes,for some content display such as navigation bar and processes like sending mail,Internet
+                        connection is required so it is better to have Internet connection turned on for better
+                        experience.</p>
+                </details>
+                <details>
+                    <summary>Why we need internet connection for registration process?</summary>
+                    <p>Yes,for registering you need internet connection,since we will verify your email ID.</p>
+                </details>
+                <details>
+                    <summary>Why we need your Email ID on registration process?</summary>
+                    <p>On registration process,we will verify your email ID by sending you a mail about your login
+                        credentials and to verify your credentials.</p>
+                </details>
+                <details>
+                    <summary>Can we access this Library Management System online through any device?</summary>
+                    <p>No,"Library Management System" is created in such a way that it can be accessed only in
+                        computer/laptop which has contains entire "Library Management System" along with server and its
+                        components.</p>
+                </details>
+                <details>
+                    <summary>How many person can use this Library Management System simultaneously?</summary>
+                    <p>Currently only one person can login and can use this "Library Management System".</p>
+                </details>
+                <details>
+                    <summary>What will happen when second person try to <br>login when person is already Logged in?
+                    </summary>
+                    <p>If second person is successfully logged in ,then immediately first person using will be logged
+                        out without any notification.So better complete your work before asking others to login.</p>
+                </details>
+                <details>
+                    <summary>Who can use "Library Management System"?</summary>
+                    <p>All students and staffs who borrow books from library can use this "Library Management System".
+                    </p>
+                </details>
+
+                <details>
+                    <summary>Why should we use this "Library Management <br>System"?</summary>
+                    <p>Because it helps in various ways like books which you have taken,how much time you have for
+                        renewal,which are the books you have to return to library .</p>
+                </details>
+
+                <details>
+                    <summary>What is the main reason for the Library Management System?</summary>
+                    <p>The main reason is to help the Librarian and to reduce the workload of Librarian.It also helps
+                        with database management like which book was taken by Student/Staff.</p>
+                </details>
+            </div><br>
+            <a href="#top" ><button class="button button2">Back to top</button></a>
+            <br><br></div>
+        <div class="column1">
+        <!--<div id="login">-->
+            <h3>LOGIN AND PROFILE RELATED FAQs</h3>
+            <div id="login-content">
+                <details>
+                    <summary>What are the ways to change your password?</summary>
+                    <b>
+                        <p>You can change the your password in your profile section by entering your current password.
+                        </p><br>
+                        <p>Please refer Forgot your password question if you don't know your current password. </p>
+                    </b>
+                </details>
+                <details>
+                    <summary>Why we can't change Email ID in profile?</summary>
+                    <b>
+                        <p>You cannot change Email ID in your profile section because we have authenticated your Email
+                            ID on your registration process so we can't allow you to change to new mail ID after
+                            registration. </p>
+                    </b>
+                </details>
+
+                <details>
+                    <summary>Did you forget your password,need to reset the password?</summary>
+                    <b>
+                        <p><u>Solution for your problem is to follow below steps carefully </u></p>
+                        <p>1)You can request for your current password in forgot password page(which can be found in
+                            login page) by entering your registered Email ID.(Make sure you have internet connection
+                            turned "ON" before clicking send mail button).</p>
+                        <p>2)On receiving mail about your password.You can login and change your password in your
+                            profile section. </p>
+                    </b>
+                </details>
+                <details>
+                    <summary>How to change your Username and other details like Year and Section and Department?
+                    </summary>
+                    <p>You can the your Username and other details in profile page in near by textbox/dropdown list
+                        given next to the required field.</p>
+                </details>
+            </div><br>
+            <a href="#top" ><button class="button button2">Back to top</button></a>
+        <br><br>
+        <!--</div>
+
+        <div id="other">-->
+            <h3>ENTRY,RENEWAL,BOOK RETURN RELATED FAQs</h3>
+            <div id="other-content">
+                <details>
+                    <summary>How many days is given for the book on Entry?</summary>
+                    <p>Initially 30 days are given for returning the book from Entry date.Books can be renewed for
+                        atmost 5 times.If the renewal is completed,then you have to return the book.</p>
+                </details>
+                <details>
+                    <summary>Where to find the return date of taken books?</summary>
+                    <p>You can find the return date of taken books in renewal page where you can select the book ID for
+                        viewing the return date.</p>
+                </details>
+
+                <details>
+                    <summary>How many times/days we can renew the book?</summary>
+                    <p>You can renew the book for atmost 5 times and also you can choose the number of days for which
+                        you want to renew the books.By default,time given is 30 days for a renewal,it can be reduced
+                        based on your request.</p>
+                </details>
+                <details>
+                    <summary>Can't renew the your books?</summary>
+                    <p>If you can't renew your books then it means that you have already used 5 renewals so kindly
+                        return the book to library.</p>
+                </details>
+
+                <details>
+                    <summary>Can't find the your book?</summary>
+                    <p>You can add the book in the table in book webpage by typing the book along with author.</p>
+                </details>
+            </div><br>
+            <a href="#top" ><button class="button button2">Back to top</button></a>
+        <br>
+        <br>
+        <!--</div>-->
+    </div>
+        <br>
+    </center>
+
+
+</body>
+
+</html>
