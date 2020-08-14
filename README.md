@@ -30,11 +30,11 @@
 
 * For this process, "sender_mail" will be server mail ID and "password1" will be its password.(I have also commented near them enter the details).  
 
-<ins>Note</ins> :
+<ins>Note</ins> :(This is for Gmail server mail ID instructions)
 
 * You have to change the settings in server mail ID to send mail.Otherwise you might see Authenticate error or print statement saying no Internet connection. 
 
-* If your server mail ID is Gmail, Kindly turn off two step verification and go to security in your account(You can access this also from your Gmail Account->My accouht).In security tab scroll down and turn on the "Less secure app access" in that Gmail account.
+* If your server mail ID is Gmail, Kindly turn off two step verification and go to security in your account(You can access this also from your Gmail Account->My account).In security tab scroll down and turn on the "Less secure app access" in that Gmail account.
 
 * It will show like below if you do the above process correctly,then it will show as below image.<br>
 
